@@ -2,12 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require("cors")
 const app = express();
+require("dotenv").config()
 
 app.use(express.json()); // for parsing application/json
 app.use(cors())
 
 // MongoDB connection (replace with your MongoDB URI)
-mongoose.connect('mongodb://localhost:27017/digitalBusinessCard');
+mongoose.connect(process.env.DB_URL);
 console.log("DataBase connect Successfully")
 
 // Define the schema for contact form submissions
