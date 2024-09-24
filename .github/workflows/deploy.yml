@@ -1,0 +1,30 @@
+name: Build and Deploy to Deno Deploy
+
+on:
+  push:
+    branches:
+      - main  # Change to your preferred branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'  # Specify the Node.js version you are using
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run build (if needed)
+        run: npm run build  # Add this if you have a build step
+
+      - name: Deploy to Deno Deploy
+        run: |
+          curl -fsSL https://deno.land/x/deploy/deployctl.sh | sh
+          deployctl deploy --project=<YOUR_PROJECT_NAME> --token=${{ secrets.DENO_TOKEN }} index.js
