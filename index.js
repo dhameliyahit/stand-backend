@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require("cors")
 const app = express();
 const dotenv = require("dotenv").config();
+const PORT = 5000
 
 app.use(express.json()); // for parsing application/json
 app.use(cors())
@@ -183,6 +184,6 @@ app.get('/api/get-submissions', async (req, res) => {
 
 
 // Start the server
-app.listen(5000, () => {
-    console.log('Server is running on port 5000');
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
